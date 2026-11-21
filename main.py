@@ -18,6 +18,9 @@ TEXT = (
 
 
 def main() -> None:
+    # Gate guard: the entry must be 1-280 Unicode code points, not blank.
+    if not TEXT.strip() or len(TEXT) > 280:
+        raise SystemExit(f"entry text invalid: {len(TEXT)} characters")
     out_dir = "/output"
     try:
         os.makedirs(out_dir, exist_ok=True)
